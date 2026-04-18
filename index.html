@@ -14,6 +14,7 @@
             --accent-color: #a855f7;
             --text-main: #ffffff;
             --text-dim: #b3b3b3;
+            --chat-bg: #1a1429;
         }
 
         * {
@@ -192,6 +193,110 @@
             color: var(--text-dim);
         }
 
+        /* --- CHATBOX STYLES --- */
+        #chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        #chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        #chat-button:hover {
+            transform: scale(1.1);
+        }
+
+        #chat-window {
+            width: 320px;
+            height: 450px;
+            background: var(--chat-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .chat-header {
+            background: var(--accent-color);
+            padding: 15px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .message.bot {
+            background: rgba(255, 255, 255, 0.1);
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .message.user {
+            background: var(--accent-color);
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .chat-input-area {
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            gap: 5px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            border-radius: 5px;
+            color: white;
+            outline: none;
+        }
+
+        .chat-input-area button {
+            background: transparent;
+            color: var(--accent-color);
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
 
     </style>
 </head>
@@ -210,7 +315,6 @@
     </nav>
 
     <div class="container">
-        
         <section id="ABOUT">
             <h1>PROFILE</h1>
             <img src="mypic.jpeg" alt="Jaazeniah Mirano" class="profile-picture">
@@ -305,7 +409,77 @@
         </footer>
     </div>
 
+    <div id="chat-widget">
+        <div id="chat-window">
+            <div class="chat-header">
+                <span>Portfolio Assistant</span>
+                <i class="fas fa-times" onclick="toggleChat()" style="cursor:pointer;"></i>
+            </div>
+            <div id="chat-messages">
+                <div class="message bot">Hi there! I'm Jaazeniah's virtual assistant. Ask me anything about this portfolio!</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="user-input" placeholder="Type a message..." onkeypress="handleKey(event)">
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <div id="chat-button" onclick="toggleChat()">
+            <i class="fas fa-comment-dots"></i>
+        </div>
+    </div>
+
+    <script>
+        const chatWindow = document.getElementById('chat-window');
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+
+        function toggleChat() {
+            chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function handleKey(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            // Add user message
+            addMessage(text, 'user');
+            userInput.value = '';
+
+            // Simple Logic/Responses
+            setTimeout(() => {
+                const response = getBotResponse(text.toLowerCase());
+                addMessage(response, 'bot');
+            }, 600);
+        }
+
+        function addMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('message', sender);
+            msgDiv.innerText = text;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function getBotResponse(input) {
+            if (input.includes('who') || input.includes('about')) 
+                return "This is the portfolio of Jaazeniah C. Mirano, a BSIT student at CPSU.";
+            if (input.includes('contact') || input.includes('email') || input.includes('phone')) 
+                return "You can reach Jaazeniah at jaazeniahm@gmail.com or 09938704437.";
+            if (input.includes('work') || input.includes('project')) 
+                return "Jaazeniah has listed several works including Canva designs and Figma prototypes in the 'My Works' and 'Outputs' sections.";
+            if (input.includes('certificate')) 
+                return "You can view the certificates in the Certificates section near the bottom of the page.";
+            if (input.includes('resume') || input.includes('cv')) 
+                return "There is a PDF download button for the resume in the RESUME section!";
+            
+            return "That's a great question! You can find more details in the different sections of the page, or use the contact form to ask Jaazeniah directly.";
+        }
+    </script>
 
 </body>
-    </html>
-    
+                    </html>
+                
