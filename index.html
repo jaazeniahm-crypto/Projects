@@ -9,12 +9,14 @@
     
     <style>
         :root {
-            --bg-color: #0f0a1a;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --accent-color: #a855f7;
+            /* Pink Theme Variables */
+            --bg-color: #2d0a1a; /* Deep berry/pink background */
+            --card-bg: rgba(255, 192, 203, 0.1);
+            --accent-color: #f472b6; /* Soft pink accent */
             --text-main: #ffffff;
-            --text-dim: #b3b3b3;
-            --chat-bg: #1a1429;
+            --text-dim: #fbcfe8;
+            --chat-bg: #3d1226;
+            --nav-bg: rgba(45, 10, 26, 0.95);
         }
 
         * {
@@ -31,16 +33,15 @@
             line-height: 1.6;
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(15, 10, 26, 0.95);
+            background: var(--nav-bg);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(244, 114, 182, 0.2);
         }
 
         nav ul {
@@ -64,7 +65,6 @@
             color: var(--accent-color);
         }
 
-        /* Layout Container */
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -79,7 +79,8 @@
         h1 {
             font-size: 2.5rem;
             margin-bottom: 2rem;
-            background: linear-gradient(90deg, #a855f7, #6366f1);
+            /* Pink to Peach Gradient */
+            background: linear-gradient(90deg, #f472b6, #fb923c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -87,11 +88,10 @@
         hr {
             border: 0;
             height: 1px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(244, 114, 182, 0.2);
             margin-bottom: 50px;
         }
 
-        /* Profile Section */
         .profile-picture {
             width: 180px;
             height: 180px;
@@ -99,10 +99,9 @@
             object-fit: cover;
             border: 4px solid var(--accent-color);
             margin-bottom: 20px;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+            box-shadow: 0 0 25px rgba(244, 114, 182, 0.5);
         }
 
-        /* Grid for Images and Videos */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -112,7 +111,7 @@
 
         .card {
             background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(244, 114, 182, 0.1);
             border-radius: 15px;
             padding: 15px;
             transition: 0.3s;
@@ -121,6 +120,7 @@
         .card:hover {
             transform: translateY(-5px);
             border-color: var(--accent-color);
+            background: rgba(244, 114, 182, 0.15);
         }
 
         .card img, .card iframe {
@@ -129,7 +129,6 @@
             display: block;
         }
 
-        /* Links & Buttons */
         .links-list {
             text-align: left;
             display: inline-block;
@@ -152,12 +151,12 @@
             text-decoration: none;
             font-weight: bold;
             margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(244, 114, 182, 0.3);
         }
 
-        /* Form Styling */
         .contact-form {
             max-width: 600px;
-            margin: 0 auto;
+            margin: 30px auto 0;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -165,10 +164,12 @@
 
         .contact-form input, .contact-form textarea {
             background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(244, 114, 182, 0.1);
             padding: 15px;
             color: white;
             border-radius: 8px;
+            width: 100%;
+            font-family: inherit;
         }
 
         .contact-form button {
@@ -179,11 +180,16 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .contact-form button:hover {
+            opacity: 0.8;
         }
 
         footer {
             padding: 40px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(244, 114, 182, 0.1);
             text-align: center;
         }
 
@@ -193,7 +199,6 @@
             color: var(--text-dim);
         }
 
-        /* --- CHATBOX STYLES --- */
         #chat-widget {
             position: fixed;
             bottom: 30px;
@@ -214,23 +219,19 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+            box-shadow: 0 4px 15px rgba(244, 114, 182, 0.4);
             font-size: 1.5rem;
             transition: transform 0.3s;
-        }
-
-        #chat-button:hover {
-            transform: scale(1.1);
         }
 
         #chat-window {
             width: 320px;
             height: 450px;
             background: var(--chat-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(244, 114, 182, 0.2);
             border-radius: 15px;
             margin-bottom: 15px;
-            display: none; /* Hidden by default */
+            display: none; 
             flex-direction: column;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -243,6 +244,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: white;
         }
 
         #chat-messages {
@@ -261,21 +263,12 @@
             border-radius: 10px;
         }
 
-        .message.bot {
-            background: rgba(255, 255, 255, 0.1);
-            align-self: flex-start;
-            border-bottom-left-radius: 2px;
-        }
-
-        .message.user {
-            background: var(--accent-color);
-            align-self: flex-end;
-            border-bottom-right-radius: 2px;
-        }
+        .message.bot { background: rgba(255, 255, 255, 0.1); align-self: flex-start; border-bottom-left-radius: 2px; }
+        .message.user { background: var(--accent-color); align-self: flex-end; border-bottom-right-radius: 2px; }
 
         .chat-input-area {
             padding: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(244, 114, 182, 0.1);
             display: flex;
             gap: 5px;
         }
@@ -283,7 +276,7 @@
         .chat-input-area input {
             flex: 1;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(244, 114, 182, 0.2);
             padding: 8px;
             border-radius: 5px;
             color: white;
@@ -297,7 +290,6 @@
             cursor: pointer;
             font-size: 1.2rem;
         }
-
     </style>
 </head>
 <body>
@@ -376,26 +368,25 @@
         <hr>
 
         <section id="RESUME">
-    <h1>RESUME</h1>
-    <p>Need a physical copy? Download my resume below.</p>
-    <a href="Jaazeniah_Mirano_Resume.pdf" download="Jaazeniah_Mirano_Resume.pdf" class="download-button">
-        <i class="fas fa-download"></i> DOWNLOAD PDF
-    </a>
-</section>
-
+            <h1>RESUME</h1>
+            <p>Need a physical copy? Download my resume below.</p>
+            <a href="/resume.pdf" download="Jaazeniah_Mirano_Resume.pdf" class="download-button">
+                <i class="fas fa-download"></i> DOWNLOAD PDF
+            </a>
+        </section>
 
         <hr>
 
         <section id="CONTACT">
             <h1>GET IN TOUCH</h1>
-            <p><i class="fas fa-envelope"></i> jaazeniahm@gmail.com</p>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:jaazeniahm@gmail.com" style="color: var(--accent-color); text-decoration: none;">jaazeniahm@gmail.com</a></p>
             <p><i class="fas fa-phone"></i> 09938704437</p>
-            <p><i class="fab fa-facebook"></i> <a href="https://www.facebook.com/jaazeniah.castillo.mirano" style="color: var(--accent-color);">Jaazeniah Mirano</a></p>
+            <p><i class="fab fa-facebook"></i> <a href="https://www.facebook.com/jaazeniah.castillo.mirano" style="color: var(--accent-color); text-decoration: none;">Jaazeniah Mirano</a></p>
             
-            <form class="contact-form" style="margin-top: 30px;">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" rows="5" required></textarea>
+            <form action="https://formspree.io/f/xnjlzboy" method="POST" class="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="_replyto" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
                 <button type="submit">SEND MESSAGE</button>
             </form>
         </section>
@@ -417,7 +408,7 @@
                 <i class="fas fa-times" onclick="toggleChat()" style="cursor:pointer;"></i>
             </div>
             <div id="chat-messages">
-                <div class="message bot">Hi there! I'm Jaazeniah's virtual assistant. Ask me anything about this portfolio!</div>
+                <div class="message bot">Hi there! Ask me anything about this portfolio!</div>
             </div>
             <div class="chat-input-area">
                 <input type="text" id="user-input" placeholder="Type a message..." onkeypress="handleKey(event)">
@@ -434,27 +425,15 @@
         const chatMessages = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
 
-        function toggleChat() {
-            chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        function handleKey(e) {
-            if (e.key === 'Enter') sendMessage();
-        }
+        function toggleChat() { chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex'; }
+        function handleKey(e) { if (e.key === 'Enter') sendMessage(); }
 
         function sendMessage() {
             const text = userInput.value.trim();
             if (!text) return;
-
-            // Add user message
             addMessage(text, 'user');
             userInput.value = '';
-
-            // Simple Logic/Responses
-            setTimeout(() => {
-                const response = getBotResponse(text.toLowerCase());
-                addMessage(response, 'bot');
-            }, 600);
+            setTimeout(() => { addMessage(getBotResponse(text.toLowerCase()), 'bot'); }, 600);
         }
 
         function addMessage(text, sender) {
@@ -466,21 +445,11 @@
         }
 
         function getBotResponse(input) {
-            if (input.includes('who') || input.includes('about')) 
-                return "This is the portfolio of Jaazeniah C. Mirano, a BSIT student at CPSU.";
-            if (input.includes('contact') || input.includes('email') || input.includes('phone')) 
-                return "You can reach Jaazeniah at jaazeniahm@gmail.com or 09938704437.";
-            if (input.includes('work') || input.includes('project')) 
-                return "Jaazeniah has listed several works including Canva designs and Figma prototypes in the 'My Works' and 'Outputs' sections.";
-            if (input.includes('certificate')) 
-                return "You can view the certificates in the Certificates section near the bottom of the page.";
-            if (input.includes('resume') || input.includes('cv')) 
-                return "There is a PDF download button for the resume in the RESUME section!";
-            
-            return "That's a great question! You can find more details in the different sections of the page, or use the contact form to ask Jaazeniah directly.";
+            if (input.includes('who') || input.includes('about')) return "This is the portfolio of Jaazeniah C. Mirano, a BSIT student at CPSU.";
+            if (input.includes('contact') || input.includes('email')) return "You can reach Jaazeniah at jaazeniahm@gmail.com.";
+            return "You can find more details in the different sections or use the contact form!";
         }
     </script>
-
 </body>
-                    </html>
+    </html>
                 
